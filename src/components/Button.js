@@ -23,7 +23,7 @@ const Button = (props) => {
       while (state.length > 1) {
         array.push(state.splice(0, 2));
       }
-      // 人数が奇数だった場合に奇数のペアも作成
+      // トータル人数が奇数だった場合に奇数人数のペアも作成
       if (state.length === 1) {
         array.push([state.shift()]);
         let lastArray = array.pop();
