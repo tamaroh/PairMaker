@@ -8,7 +8,6 @@ const Button = (props) => {
   function go() {
     let array = [];
     function shuffle() {
-      // console.log(state);
       for (let i = state.length - 1; i >= 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [state[i], state[j]] = [state[j], state[i]];
@@ -27,9 +26,7 @@ const Button = (props) => {
       if (state.length === 1) {
         array.push([state.shift()]);
         let lastArray = array.pop();
-        // console.log(lastArray);
         array[array.length - 1].push(lastArray);
-        console.log(array);
       }
 
       //コピーした空の配列
