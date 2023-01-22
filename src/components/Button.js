@@ -37,11 +37,11 @@ const Button = (props) => {
 
       console.log(array);
       //取得した値をコピーした空の配列に追加
-      if (pairStateCopy.length % 2 === 1) {
-        pairStateCopy[pairStateCopy.length - 2].push(
-          pairStateCopy[pairStateCopy.length - 1].join(" & ")
-        );
-      }
+      // if (pairStateCopy.length % 2 === 1) {
+      //   pairStateCopy[pairStateCopy.length - 2].push(
+      //     pairStateCopy[pairStateCopy.length - 1].join(" & ")
+      //   );
+      // }
       array.map((pair) => {
         pairStateCopy.push(pair.join(" & "));
       });
