@@ -8,6 +8,9 @@ const Button = (props) => {
   function go() {
     let array = [];
     function shuffle() {
+      if (state.length === 0) {
+        return state;
+      }
       for (let i = state.length - 1; i >= 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [state[i], state[j]] = [state[j], state[i]];
