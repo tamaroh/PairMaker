@@ -42,7 +42,7 @@ const Button = (props) => {
       //     pairStateCopy[pairStateCopy.length - 1].join(" & ")
       //   );
       // }
-      array.map((pair) => {
+      array.forEach((pair) => {
         pairStateCopy.push(pair.join(" & "));
       });
 
