@@ -1,55 +1,55 @@
 import React from "react";
 
 const Button = (props) => {
-  let { state, setDisplayState, pairState, setPairState } = props;
+  let { students, setCount, pairs, setPairs } = props;
 
   //配列をシャッフルする関数
 
   function go() {
     let array = [];
     function shuffle() {
-      if (state.length === 0) {
-        return state;
+      if (students.length === 0) {
+        return students;
       }
-      for (let i = state.length - 1; i >= 0; i--) {
+      for (let i = students.length - 1; i >= 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [state[i], state[j]] = [state[j], state[i]];
+        [students[i], students[j]] = [students[j], students[i]];
       }
-      setDisplayState(true);
-      console.log(state);
-      return state;
+      setCount(true);
+      console.log(students);
+      return students;
     }
 
     //シャッフルしてできた配列をペアごとに分けて新しく用意した配列に追加
     function pairSet() {
-      while (state.length > 1) {
-        array.push(state.splice(0, 2));
+      while (students.length > 1) {
+        array.push(students.splice(0, 2));
       }
       // トータル人数が奇数だった場合に奇数人数のペアも作成
-      if (state.length === 1) {
-        array.push([state.shift()]);
+      if (students.length === 1) {
+        array.push([students.shift()]);
         let lastArray = array.pop();
         array[array.length - 1].push(lastArray);
       }
 
       //コピーした空の配列
-      let pairStateCopy = pairState.slice(0);
+      let pairsCopy = pairs.slice(0);
 
       console.log(array);
       //取得した値をコピーした空の配列に追加
-      // if (pairStateCopy.length % 2 === 1) {
-      //   pairStateCopy[pairStateCopy.length - 2].push(
-      //     pairStateCopy[pairStateCopy.length - 1].join(" & ")
+      // if (pairsCopy.length % 2 === 1) {
+      //   pairsCopy[pairsCopy.length - 2].push(
+      //     pairsCopy[pairsCopy.length - 1].join(" & ")
       //   );
       // }
       array.forEach((pair) => {
-        pairStateCopy.push(pair.join(" & "));
+        pairsCopy.push(pair.join(" & "));
       });
 
-      setPairState(pairStateCopy);
-      console.log(pairStateCopy);
+      setPairs(pairsCopy);
+      console.log(pairsCopy);
 
-      return pairState;
+      return pairs;
     }
 
     shuffle();

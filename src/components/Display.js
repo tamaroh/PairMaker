@@ -4,30 +4,30 @@ import Button from "./Button";
 
 const Display = (props) => {
   let {
-    state,
-    setState,
-    displayState,
-    setDisplayState,
-    pairState,
-    setPairState,
+    students,
+    setStudents,
+    count,
+    setCount,
+    pairs,
+    setPairs,
   } = props;
   return (
     <>
       <div>
-        <Input state={state} setState={setState} />
+        <Input students={students} setStudents={setStudents} />
         <Button
-          state={state}
-          setDisplayState={setDisplayState}
-          pairState={pairState}
-          setPairState={setPairState}
+          students={students}
+          setCount={setCount}
+          pairs={pairs}
+          setPairs={setPairs}
         />
       </div>
 
-      {displayState ? (
+      {count ? (
         <div>
           <p className="display">〜〜〜 本日のペア 〜〜〜</p>
           <div className="each-pair">
-            {pairState.map((elem) => {
+            {pairs.map((elem) => {
               return <p key={elem}>{elem}</p>;
             })}
           </div>
