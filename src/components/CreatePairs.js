@@ -23,13 +23,13 @@
 
 
 const history = [];
-const paired = new Map();
+const unpaired = new Map();
 
-const createPairedMap = (array) => {
+const createUnpairedMap = (array) => {
   array.forEach((element, index, self) => {
     const set = new Set(self);
     set.delete(element);
-    paired.set(element, set);
+    unpaired.set(element, set);
   });
 }
 
@@ -38,8 +38,8 @@ const getRandomElement = (set) => {
   const index = Math.floor(Math.random() * array.length);
   return array[index];
 }
-const isPaired = (person1, person2) => {
-  return paired.get(person1).has(person2);
+const isunPaired = (person1, person2) => {
+  return unpaired.get(person1).has(person2);
 }
 
 const createPairs = (array) => {
@@ -50,16 +50,19 @@ const createPairs = (array) => {
     const pair = [person1];
     tempSet.delete(person1);
     let person2 = getRandomElement(tempSet);
-    while (!(isPaired(person1, person2))) {
+    while (!(isunPaired(person1, person2))) {
       person2 = getRandomElement(tempSet);
     }
     pair.push(person2);
     tempSet.delete(person2);
+    unpaired.get(person1).delete(person2);
+    unpaired.get(person2).delete(person1);
     pairs.push(pair);
   }
   if (tempSet.size === 1) {
     pairs[0].push(tempSet.values().next().value);
   }
+  history.push(pairs);
   return pairs;
 }
 
@@ -72,32 +75,36 @@ const sampleArray = [
   "e",
   "f",
   "g",
-  "h",
-  "i",
-  "j",
-  "k",
-  "l",
-  "m",
-  "n",
-  "o",
-  "p",
-  "q",
-  "r",
-  "s",
-  "t",
-  "u",
-  "v",
-  "w",
-  "x",
-  "y",
-  "z",
-  "い",
-  "ろ",
-  "は",
-  "に",
-  "ほ",
+  // "h",
+  // "i",
+  // "j",
+  // "k",
+  // "l",
+  // "m",
+  // "n",
+  // "o",
+  // "p",
+  // "q",
+  // "r",
+  // "s",
+  // "t",
+  // "u",
+  // "v",
+  // "w",
+  // "x",
+  // "y",
+  // "z",
+  // "い",
+  // "ろ",
+  // "は",
+  // "に",
+  // "ほ",
 
 ]
 
-createPairedMap(sampleArray);
-console.log(createPairs(sampleArray));
+createUnpairedMap(sampleArray);
+for (let i = 0; i < 3; i++) {
+  createPairs(sampleArray)
+}
+console.log(history);
+console.log(unpaired.get('a'));
