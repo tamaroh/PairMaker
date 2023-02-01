@@ -1,12 +1,14 @@
 import React from "react";
+import axios from "axios";
 
 const Button = (props) => {
   let { state, setDisplayState, pairState, setPairState } = props;
 
-  //配列をシャッフルする関数
-
-  function go() {
+  async function go() {
     let array = [];
+    let pairStateCopy = [];
+
+    //配列をシャッフルする関数
     function shuffle() {
       if (state.length === 0) {
         return state;
@@ -33,7 +35,7 @@ const Button = (props) => {
       }
 
       //コピーした空の配列
-      let pairStateCopy = pairState.slice(0);
+      pairStateCopy = pairState.slice(0);
 
       console.log(array);
       //取得した値をコピーした空の配列に追加
@@ -45,15 +47,18 @@ const Button = (props) => {
       array.map((pair) => {
         pairStateCopy.push(pair.join(" & "));
       });
-
       setPairState(pairStateCopy);
-      console.log(pairStateCopy);
-
+      // console.log(pairStateCopy);
       return pairState;
     }
 
     shuffle();
     pairSet();
+
+    console.log("pairStatecopy", pairStateCopy);
+
+    const { data } = await axios.post("/gcp", { input : JSON.stringify(pairState) });
+    console.log(data);
   }
 
   return (
