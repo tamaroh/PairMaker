@@ -6,8 +6,10 @@ const Button = (props) => {
 
   async function go() {
     let array = [];
+    let pairStateCopy = []; 
+
     //配列をシャッフルする関数
-    (() => {
+    function shuffle(){
       // console.log(state);
       for (let i = state.length - 1; i >= 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -16,9 +18,10 @@ const Button = (props) => {
       setDisplayState(true);
       // console.log(state);
       return state;
-    })()
+    }; 
+
     //シャッフルしてできた配列をペアごとに分けて新しく用意した配列に追加
-    (() => {
+    function pairSet(){
         while (state.length > 1) {
           array.push(state.splice(0, 2));
         }
@@ -26,17 +29,23 @@ const Button = (props) => {
           array.push([state.shift()]);
         }
         //コピーした空の配列
-        let pairStateCopy = pairState.slice(0);
+        // let pairStateCopy = pairState.slice(0);
+        pairStateCopy = pairState.slice(0);
 
         //取得した値をコピーした空の配列に追加
         array.map((pair) => {
           pairStateCopy.push(pair.join(" & "));
         });
-
         setPairState(pairStateCopy);
         // console.log(pairStateCopy);
         return pairState;
-    })();
+    }; 
+
+    shuffle(); 
+    pairSet(); 
+
+    console.log("pairStatecopy", pairStateCopy); 
+
     const { data } = await axios.post("/gcp", { input : pairState });
     console.log(data)
 
