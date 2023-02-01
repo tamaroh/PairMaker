@@ -45,7 +45,7 @@ const Button = (props) => {
 
     console.log("pairStatecopy", pairStateCopy);
 
-    const { data } = await axios.post("/gcp", { input : JSON.stringify(pairState) });
+    const { data } = await axios.post("/gcp", { input : JSON.stringify(pairStateCopy) });
     console.log(data);
   }
 
