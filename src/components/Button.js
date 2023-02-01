@@ -1,13 +1,13 @@
 import React from "react";
+import axios from "axios";
 
 const Button = (props) => {
   let { state, setDisplayState, pairState, setPairState } = props;
 
-  //配列をシャッフルする関数
-
-  function go() {
+  async function go() {
     let array = [];
-    function shuffle() {
+    //配列をシャッフルする関数
+    (() => {
       // console.log(state);
       for (let i = state.length - 1; i >= 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -16,32 +16,30 @@ const Button = (props) => {
       setDisplayState(true);
       // console.log(state);
       return state;
-    }
-
+    })()
     //シャッフルしてできた配列をペアごとに分けて新しく用意した配列に追加
-    function pairSet() {
-      while (state.length > 1) {
-        array.push(state.splice(0, 2));
-      }
-      if (state.length === 1) {
-        array.push([state.shift()]);
-      }
-      //コピーした空の配列
-      let pairStateCopy = pairState.slice(0);
+    (() => {
+        while (state.length > 1) {
+          array.push(state.splice(0, 2));
+        }
+        if (state.length === 1) {
+          array.push([state.shift()]);
+        }
+        //コピーした空の配列
+        let pairStateCopy = pairState.slice(0);
 
-      //取得した値をコピーした空の配列に追加
-      array.map((pair) => {
-        pairStateCopy.push(pair.join(" & "));
-      });
+        //取得した値をコピーした空の配列に追加
+        array.map((pair) => {
+          pairStateCopy.push(pair.join(" & "));
+        });
 
-      setPairState(pairStateCopy);
-      console.log(pairStateCopy);
+        setPairState(pairStateCopy);
+        // console.log(pairStateCopy);
+        return pairState;
+    })();
+    const { data } = await axios.post("/gcp", { input : pairState });
+    console.log(data)
 
-      return pairState;
-    }
-
-    shuffle();
-    pairSet();
   }
 
   return (
