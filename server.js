@@ -27,16 +27,23 @@ app.post("/gcp", async (req, res) => {
 
   const sheet = doc.sheetsById[0];
 
-  const data = await req.body;
-  console.log("data ", data);
+  let data = await req.body;
+  data = JSON.parse(data.input);
 
-  await sheet.loadCells("A1:E10"); //セルの操作（読み込み）
-  const a1 = await sheet.getCell(0, 0);
-
-  a1.value = data.input; //セルの操作（書き込み）
-  await sheet.saveUpdatedCells();
-
-  res.send("update!");
+  await sheet.loadCells("A1:F6"); //セルの操作（読み込み）
+  let day_offset = 1; //　行のタイトル分のオフセット
+  let pair_offset = 1; // 列のタイトル分のオフセット
+  let counter = 0;
+  //現在は1日分だけペアを組む設定　※後で要変更
+  for (let day_index = 0 + day_offset; day_index < 1 + day_offset; day_index++) {
+    for (let pair_index = 0 + pair_offset;pair_index < data.length + pair_offset;pair_index++) {
+      const cell = await sheet.getCell(pair_index, day_index);
+      cell.value = data[counter];
+      await sheet.saveUpdatedCells();
+      counter++;
+    }
+  }
+  res.send("update spread sheet!");
 });
 
 const port = process.env.PORT || 4000;

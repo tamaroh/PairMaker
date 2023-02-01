@@ -43,7 +43,7 @@ const Button = (props) => {
     shuffle();
     pairSet();
 
-    console.log("pairStatecopy", pairStateCopy);
+    // console.log("pairStatecopy", pairStateCopy);
 
     const { data } = await axios.post("/gcp", { input : JSON.stringify(pairStateCopy) });
     console.log(data);
