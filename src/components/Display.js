@@ -27,8 +27,8 @@ const Display = (props) => {
         <div>
           <p className="display">〜〜〜 本日のペア 〜〜〜</p>
           <div className="each-pair">
-            {pairState.map((elem) => {
-              return <p>{elem}</p>;
+            {pairState.map((elem, i) => {
+              return <p key={i.toString()}>{elem}</p>;
             })}
           </div>
         </div>
