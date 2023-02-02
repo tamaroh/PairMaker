@@ -3,20 +3,20 @@ import Display from "./components/Display";
 import { useState } from "react";
 
 function App() {
-  const [state, setState] = useState("");
-  const [displayState, setDisplayState] = useState(false);
-  const [pairState, setPairState] = useState([]);
+  const [students, setStudents] = useState("");
+  const [count, setCount] = useState(0);
+  const [pairs, setPairs] = useState([]);
 
   return (
     <div>
       <h1 className="title">Pair Maker</h1>
       <Display
-        state={state}
-        setState={setState}
-        displayState={displayState}
-        setDisplayState={setDisplayState}
-        pairState={pairState}
-        setPairState={setPairState}
+        students={students}
+        setStudents={setStudents}
+        count={count}
+        setCount={setCount}
+        pairs={pairs}
+        setPairs={setPairs}
       />
     </div>
   );
