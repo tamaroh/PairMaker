@@ -6,7 +6,7 @@ const Input = (props) => {
       <textarea
         onChange={(e) => {
           //テキストエリアの名前を取得
-          props.setState(e.target.value.split(/\n/));
+          props.setStudents(e.target.value.split(/\n/));
         }}
       ></textarea>
     </div>

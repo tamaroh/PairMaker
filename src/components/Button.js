@@ -1,63 +1,18 @@
 import React from "react";
+import MakePair from "./MakePair";
 import axios from "axios";
 
 const Button = (props) => {
-  let { state, setDisplayState, pairState, setPairState } = props;
+  let { students, setCount, pairs, setPairs } = props;
+
+  //配列をシャッフルする関数
 
   async function go() {
-    let array = [];
-    let pairStateCopy = [];
-
-    //配列をシャッフルする関数
-    function shuffle() {
-      if (state.length === 0) {
-        return state;
-      }
-      for (let i = state.length - 1; i >= 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [state[i], state[j]] = [state[j], state[i]];
-      }
-      setDisplayState(true);
-      console.log(state);
-      return state;
-    }
-
-    //シャッフルしてできた配列をペアごとに分けて新しく用意した配列に追加
-    function pairSet() {
-      while (state.length > 1) {
-        array.push(state.splice(0, 2));
-      }
-      // トータル人数が奇数だった場合に奇数人数のペアも作成
-      if (state.length === 1) {
-        array.push([state.shift()]);
-        let lastArray = array.pop();
-        array[array.length - 1].push(lastArray);
-      }
-
-      //コピーした空の配列
-      pairStateCopy = pairState.slice(0);
-
-      console.log(array);
-      //取得した値をコピーした空の配列に追加
-      // if (pairStateCopy.length % 2 === 1) {
-      //   pairStateCopy[pairStateCopy.length - 2].push(
-      //     pairStateCopy[pairStateCopy.length - 1].join(" & ")
-      //   );
-      // }
-      array.map((pair) => {
-        pairStateCopy.push(pair.join(" & "));
-      });
-      setPairState(pairStateCopy);
-      // console.log(pairStateCopy);
-      return pairState;
-    }
-
-    shuffle();
-    pairSet();
-
-    console.log("pairStatecopy", pairStateCopy);
-
-    const { data } = await axios.post("/gcp", { input : JSON.stringify(pairState) });
+    const result = MakePair(20, students);
+    setPairs(result);
+    setCount(1)
+    console.log(result);
+    const { data } = await axios.post("/gcp", { input : JSON.stringify(result) });
     console.log(data);
   }
 
