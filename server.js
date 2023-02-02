@@ -2,7 +2,6 @@ const path = require("path");
 const express = require("express");
 const {
   GoogleSpreadsheet,
-  // GoogleSpreadsheetWorksheet,
 } = require("google-spreadsheet");
 require("dotenv").config();
 
@@ -25,7 +24,7 @@ app.post("/gcp", async (req, res) => {
   await doc.loadInfo(); // loads document properties and worksheets
   console.log(doc.title);
 
-  const sheet = doc.sheetsById[0];
+  const sheet = doc.sheetsByTitle["cc-pairmaker-test"];
 
   let data = await req.body;
   data = JSON.parse(data.input);
@@ -34,10 +33,19 @@ app.post("/gcp", async (req, res) => {
   let day_offset = 1; //　行のタイトル分のオフセット
   let pair_offset = 1; // 列のタイトル分のオフセット
   let counter = 0;
-  //現在は1日分だけペアを組む設定　※後で要変更
-  for (let day_index = 0 + day_offset; day_index < 1 + day_offset; day_index++) {
-    for (let pair_index = 0 + pair_offset;pair_index < data.length + pair_offset;pair_index++) {
-      const cell = await sheet.getCell(pair_index, day_index);
+  //現在は1日分だけペアを組む設定　※後で変更必要
+  for (
+    let day_index = 0 + day_offset;
+    day_index < 1 + day_offset;
+    day_index++
+  ) {
+    for (
+      let pair_index = 0 + pair_offset;
+      pair_index < data.length + pair_offset;
+      pair_index++
+    ) {
+      const cell = await sheet.getCell(day_index, pair_index);
+
       cell.value = data[counter];
       await sheet.saveUpdatedCells();
       counter++;
