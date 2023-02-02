@@ -27,9 +27,7 @@ const Display = (props) => {
         <div>
           <p className="display">〜〜〜 本日のペア 〜〜〜</p>
           <div className="each-pair">
-            {pairs.map((elem) => {
-              return <p key={elem}>{elem}</p>;
-            })}
+            {JSON.stringify(pairs)}
           </div>
         </div>
       ) : null}

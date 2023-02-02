@@ -22,7 +22,7 @@ const MakePair = (days, array) => {
     let person1, person2;
     while (tempSet.size > 1) {
       person1 = getRandomElement(tempSet);
-      const pair = [person1];
+      let pair = person1;
       tempSet.delete(person1);
       const target = Array.from(tempSet).filter(person => !(isPaired(person1, person)));
       if (target.length > 0) {
@@ -34,12 +34,13 @@ const MakePair = (days, array) => {
       // while (isPaired(person1, person2)) {
       //   person2 = getRandomElement(tempSet);
       // }
-      pair.push(person2);
+      pair += ` & ${person2}`;
       tempSet.delete(person2);
       pairs.push(pair);
     }
     if (tempSet.size === 1) {
-      pairs[0].push(tempSet.values().next().value);
+      // pairs[0].push(tempSet.values().next().value);
+      pairs[0] += ` & ${tempSet.values().next().value}`;
     }
     if (!isDoubled) {
       unpaired.get(person1).delete(person2);

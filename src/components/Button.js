@@ -9,6 +9,7 @@ const Button = (props) => {
   function go() {
     const result = MakePair(20, students);
     setPairs(result);
+    setCount(1)
     console.log(result);
     // let array = [];
     // function shuffle() {
