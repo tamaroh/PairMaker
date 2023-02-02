@@ -20,50 +20,50 @@
  * ペア配列ができたら、それとnunmを履歴に追加する。
  * 
  */
-
-
-const history = [];
-const unpaired = new Map();
-
-const createUnpairedMap = (array) => {
+const makePair = (days, array) => {
+  const history = [];
+  const unpaired = new Map();
   array.forEach((element, index, self) => {
     const set = new Set(self);
     set.delete(element);
     unpaired.set(element, set);
   });
-}
 
-const getRandomElement = (set) => {
-  const array = Array.from(set);
-  const index = Math.floor(Math.random() * array.length);
-  return array[index];
-}
-const isunPaired = (person1, person2) => {
-  return unpaired.get(person1).has(person2);
-}
-
-const createPairs = (array) => {
-  const pairs = [];
-  const tempSet = new Set(array);
-  while (tempSet.size > 2) {
-    const person1 = getRandomElement(tempSet);
-    const pair = [person1];
-    tempSet.delete(person1);
-    let person2 = getRandomElement(tempSet);
-    while (!(isunPaired(person1, person2))) {
-      person2 = getRandomElement(tempSet);
+  const getRandomElement = (set) => {
+    const array = Array.from(set);
+    const index = Math.floor(Math.random() * array.length);
+    return array[index];
+  }
+  const isunPaired = (person1, person2) => {
+    return unpaired.get(person1).has(person2);
+  }
+  const createPairs = (array) => {
+    const pairs = [];
+    const tempSet = new Set(array);
+    while (tempSet.size > 2) {
+      const person1 = getRandomElement(tempSet);
+      const pair = [person1];
+      tempSet.delete(person1);
+      let person2 = getRandomElement(tempSet);
+      while (!(isunPaired(person1, person2))) {
+        person2 = getRandomElement(tempSet);
+      }
+      pair.push(person2);
+      tempSet.delete(person2);
+      unpaired.get(person1).delete(person2);
+      unpaired.get(person2).delete(person1);
+      pairs.push(pair);
     }
-    pair.push(person2);
-    tempSet.delete(person2);
-    unpaired.get(person1).delete(person2);
-    unpaired.get(person2).delete(person1);
-    pairs.push(pair);
+    if (tempSet.size === 1) {
+      pairs[0].push(tempSet.values().next().value);
+    }
+    history.push(pairs);
+    return pairs;
   }
-  if (tempSet.size === 1) {
-    pairs[0].push(tempSet.values().next().value);
+  for (let i = 0; i < days; i++) {
+    createPairs(array);
   }
-  history.push(pairs);
-  return pairs;
+  return history;
 }
 
 //test
@@ -101,10 +101,4 @@ const sampleArray = [
   // "ほ",
 
 ]
-
-createUnpairedMap(sampleArray);
-for (let i = 0; i < 3; i++) {
-  createPairs(sampleArray)
-}
-console.log(history);
-console.log(unpaired.get('a'));
+console.log(makePair(4, sampleArray));
