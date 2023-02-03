@@ -31,20 +31,22 @@ const MakePair = (days, array) => {
         person2 = getRandomElement(tempSet);
         isDoubled = true;
       }
-      // while (isPaired(person1, person2)) {
-      //   person2 = getRandomElement(tempSet);
-      // }
       pair += ` & ${person2}`;
       tempSet.delete(person2);
+      unpaired.get(person1).delete(person2);
+      if (unpaired.get(person1).size === 0) {
+        unpaired.delete(person1);
+        const newSet = new Set(array);
+        newSet.delete(person1);
+        unpaired.set(person1, newSet);
+      }
+      unpaired.get(person2).delete(person1);
       pairs.push(pair);
     }
     if (tempSet.size === 1) {
-      // pairs[0].push(tempSet.values().next().value);
       pairs[0] += ` & ${tempSet.values().next().value}`;
     }
     if (!isDoubled) {
-      unpaired.get(person1).delete(person2);
-      unpaired.get(person2).delete(person1);
       history.push(pairs);
     }
     return pairs;
@@ -56,7 +58,7 @@ const MakePair = (days, array) => {
 }
 
 export default MakePair;
-//test
+// test
 // const sampleArray = [
 //   "a",
 //   "b",
@@ -131,4 +133,4 @@ export default MakePair;
 //     console.log("checkDepPair: ", checkDepPair(elem));
 //   }
 // }
-// test(makePair(2, sampleArray));
+// test(MakePair(20, sampleArray));

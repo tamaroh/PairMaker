@@ -3,7 +3,7 @@ import MakePair from "./MakePair";
 import axios from "axios";
 
 const Button = (props) => {
-  let { students, setCount, pairs, setPairs } = props;
+  let { students, setCount, setPairs } = props;
 
   //配列をシャッフルする関数
 
