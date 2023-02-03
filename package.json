@@ -19,10 +19,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "npm i && react-scripts build",
+    "react-start" : "react-scripts start",
+    "build": "npm install && react-scripts build",
     "server-dev": "nodemon server.js",
-    "server-start": "node server.js",
+    "start": "node server.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -46,5 +46,6 @@
   },
   "devDependencies": {
     "react-router-dom": "^6.8.0"
-  }
+  },
+  "proxy": "http://localhost:4000"
 }
