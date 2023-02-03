@@ -5,13 +5,12 @@ const express = require("express");
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 require("dotenv").config();
 
-console.log("hello"); 
 
 const doc = new GoogleSpreadsheet(process.env.SHEET_ID);
 (async function () {
   await doc.useServiceAccountAuth({
     client_email: process.env.GOOGLE_SPREADSHEET_CLIENT_EMAIL,
-    private_key: process.env.GOOGLE_SPREADSHEET_PRIVATE_KEY.replace(/\\n/g, "\n"),
+    private_key: process.env.GOOGLE_SPREADSHEET_PRIVATE_KEY,
   });
 })();
 
