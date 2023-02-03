@@ -9,7 +9,7 @@ function Home() {
 
   return (
     <div>
-      <h1 className="title">Pair Maker</h1>
+      <h1 className="title">Input names</h1>
       <Display
         state={state}
         setState={setState}

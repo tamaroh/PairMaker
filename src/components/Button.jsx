@@ -51,7 +51,7 @@ const Button = (props) => {
 
   return (
     <div className="make-pair-button">
-      <button onClick={() => go()}>ペアを組む</button>
+      <button onClick={() => go()}>Make pairs</button>
     </div>
   );
 };

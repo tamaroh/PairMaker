@@ -1,33 +1,57 @@
+import React, { useState, useEffect } from "react";
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 import "./App.css";
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { GoogleLogin } from '@react-oauth/google';
 import Home from "./components/Home";
-import Login_require from "./components/Login_require";
-import Login_failure from "./components/Login_failure";
-
+// import Login_require from "./components/Login_require";
+// import Login_failure from "./components/Login_failure";
 
 function App() {
-  const responseMessage = (response) => {
-        console.log(response);
-    };
-    const errorMessage = (error) => {
-        console.log(error);
-    };
+  const [user, setUser] = useState([]);
+  const [profile, setProfile] = useState([]);
+
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+              Accept: "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          setProfile(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [user]);
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse),
+    onError: (error) => console.log("Login Failed:", error),
+  });
+  // log out function to log the user out of google and set the profile array to null
+  const logOut = () => {
+    googleLogout();
+    setProfile(null);
+  };
   return (
     <div>
-      <h2>React Google Login</h2>
+      <h2>Pair Maker</h2>
       <br />
       <br />
-      <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+      {profile ? (
+        <div>
+          <Home />
+          <button onClick={logOut}>Log out</button>
+        </div>
+      ) : (
+        <button onClick={() => login()}>Sign in with Google 🚀 </button>
+      )}
     </div>
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<Login_require />} />
-    //     <Route path="/auth" element={<Auth />} />
-    //     <Route path="/auth/callback/success" element={<Home />} />
-    //     <Route path="/auth/callback/failure" element={<Login_failure />} />
-    //   </Routes>
-    // </BrowserRouter>
   );
 }
 export default App;
