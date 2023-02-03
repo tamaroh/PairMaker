@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Login_require from "./components/Login_require";
 import Login_failure from "./components/Login_failure";
+import Auth from "./components/Auth";
+
 
 function App() {
 
@@ -10,6 +12,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login_require />} />
+        <Route path="/auth" element={<Auth />} />
         <Route path="/auth/callback/success" element={<Home />} />
         <Route path="/auth/callback/failure" element={<Login_failure />} />
       </Routes>

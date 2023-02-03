@@ -2,7 +2,7 @@
 function Login() {
     return (
       <>
-        <a href="/auth/google">Google でログインする</a>
+        <a href="/auth">Google でログインする</a>
       </>
     );
 }
