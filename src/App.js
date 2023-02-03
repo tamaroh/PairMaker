@@ -3,8 +3,6 @@ import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import "./App.css";
 import Home from "./components/Home";
-// import Login_require from "./components/Login_require";
-// import Login_failure from "./components/Login_failure";
 
 function App() {
   const [user, setUser] = useState([]);
