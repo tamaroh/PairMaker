@@ -1,5 +1,6 @@
 const path = require("path");
 const express = require("express");
+const GOOGLE_SPREADSHEET_PRIVATE_KEY = require()
 // const doc = require("./google_spreadsheet_auth")
 
 const { GoogleSpreadsheet } = require("google-spreadsheet");
@@ -9,7 +10,7 @@ const doc = new GoogleSpreadsheet(process.env.SHEET_ID);
 (async function () {
   await doc.useServiceAccountAuth({
     client_email: process.env.GOOGLE_SPREADSHEET_CLIENT_EMAIL,
-    private_key: `${process.env.GOOGLE_SPREADSHEET_PRIVATE_KEY}`,
+    private_key: process.env.GOOGLE_SPREADSHEET_PRIVATE_KEY.replace(/\\n/g, "\n"),
   });
 })();
 
