@@ -1,6 +1,6 @@
 
 # PairMaker
-## let's make pairs easily! 
+## let's make pairs easily!! 
 
 ```npm run i```
 
