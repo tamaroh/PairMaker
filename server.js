@@ -15,8 +15,8 @@ app.use(express.static(path.join(__dirname, "/build")));
 // Initialize Auth
 (async function () {
   await doc.useServiceAccountAuth({
-    client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    private_key: process.env.GOOGLE_PRIVATE_KEY,
+    client_email: process.env.GOOGLE_SPREADSHEET_CLIENT_EMAIL,
+    private_key: process.env.GOOGLE_SPREADSHEET_PRIVATE_KEY,
   });
 })();
 

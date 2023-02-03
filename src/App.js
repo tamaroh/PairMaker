@@ -1,24 +1,19 @@
 import "./App.css";
-import Display from "./components/Display";
-import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Login_require from "./components/Login_require";
+import Login_failure from "./components/Login_failure";
 
 function App() {
-  const [state, setState] = useState("");
-  const [displayState, setDisplayState] = useState(false);
-  const [pairState, setPairState] = useState([]);
 
   return (
-    <div>
-      <h1 className="title">Pair Maker</h1>
-      <Display
-        state={state}
-        setState={setState}
-        displayState={displayState}
-        setDisplayState={setDisplayState}
-        pairState={pairState}
-        setPairState={setPairState}
-      />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login_require />} />
+        <Route path="/auth/callback/success" element={<Home />} />
+        <Route path="/auth/callback/failure" element={<Login_failure />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 export default App;
