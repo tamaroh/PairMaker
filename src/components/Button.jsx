@@ -33,7 +33,7 @@ const Button = (props) => {
 
       //取得した値をコピーした空の配列に追加
       array.map((pair) => {
-        pairStateCopy.push(pair.join(" & "));
+        return pairStateCopy.push(pair.join(" & "));
       });
       setPairState(pairStateCopy);
       // console.log(pairStateCopy);
