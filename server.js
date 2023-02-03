@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "/build")));
 
 
-app.post("/gcp", async (req, res) => {
+app.post("https://cc-pair-maker.onrender.com/gcp", async (req, res) => {
   await doc.loadInfo(); // loads document properties and worksheets
   console.log(doc.title);
 
