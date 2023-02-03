@@ -1,6 +1,9 @@
 const path = require("path");
 const express = require("express");
 // const doc = require("./google_spreadsheet_auth")
+const fs = require("fs");
+let prvkey = fs.readFileSync(".env_prvkey");
+console.log(prvkey);
 
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 require("dotenv").config();

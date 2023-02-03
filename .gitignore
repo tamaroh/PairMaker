@@ -25,3 +25,4 @@ yarn-error.log*
 .env
 .env_myenv
 gsp_auth_info
+.env_prvkey
