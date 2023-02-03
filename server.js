@@ -1,10 +1,11 @@
 const path = require("path");
 const express = require("express");
-const GOOGLE_SPREADSHEET_PRIVATE_KEY = require()
 // const doc = require("./google_spreadsheet_auth")
 
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 require("dotenv").config();
+
+console.log("hello"); 
 
 const doc = new GoogleSpreadsheet(process.env.SHEET_ID);
 (async function () {
