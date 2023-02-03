@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./App";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import env from "react-dotenv"; 
 
 console.log(document.getElementById("root"));
 
