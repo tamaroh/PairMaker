@@ -1,8 +1,6 @@
 const path = require("path");
 const express = require("express");
 // const doc = require("./google_spreadsheet_auth")
-const secrets = require("/etc/secrets/.env"); 
-console.log(secrets)
 
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 require("dotenv").config();
