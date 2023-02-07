@@ -14,34 +14,59 @@ app.post("/gcp", async (req, res) => {
 
   let data = await req.body;
   data = JSON.parse(data.input);
-  console.log("data: ", data)
+  console.log("data: ", data);
+  console.log("data length: ", data.length);
+
 
   await sheet.loadCells("A1:U21"); //セルの操作（読み込み）, @miku 20日分以上の組み合わせを作成または20組以上のペアを作成する場合は変更が必要
   let day_offset = 1; //　行のタイトル分のオフセット
-  let pair_offset = 1; // 列のタイトル分のオフセット
-  let counter = 0;
+  // let pair_offset = 1; // 列のタイトル分のオフセット
+  // let counter = 0;
   //20日分ペアを組む設定　※定値
   for (
     let day_index = 0 + day_offset;
     day_index < data.length + day_offset;
     day_index++
   ) {
-    console.log("day_index ", day_index); 
-    await data[day_index - 1].forEach((_, index) => {
-      return new Promise((resolve) => {
+    new Promise((resolve) => {
+      setTimeout(() => {
+        data[day_index - 1].forEach((_, index) => {
           const cell = sheet.getCell(day_index, index + 1);
-          // console.log("cell 1: ", cell);
+          cell.value = data[day_index - 1][index];
+          sheet.saveUpdatedCells();
+          resolve("update!")
+        });
+      }, 20000);
+    }).then((e) => {
+      console.log(e);
+    });
+
+    /*
+    async/await, Promiseを使って書き込みを試みるも書き込み量が多くエラーになる
+
+    data[day_index - 1].forEach((_, index) => {
+      return () => new Promise((resolve) => {
+          const cell = sheet.getCell(day_index, index + 1);
           return resolve(cell);
       }).then((cell) => {
         setTimeout(() => {
           console.log("cell 2: ", cell);
           cell.value = data[day_index - 1][index];
           sheet.saveUpdatedCells();
-        }, 5000)
+        }, 1000);
       });
-    });
+    })
+    */
+
+    /*
+    書き込みを減らすために配列を各行に挿入してみた -> めっちゃ見にくい
+
+    const cell = sheet.getCell(day_index, 1); 
+    cell.value = JSON.stringify(data[day_index - 1]); 
+    sheet.saveUpdatedCells(); 
+    */
   }
-  res.send("update spread sheet!");
+  res.send(`update spread sheet!`);
 });
 
 const port = process.env.PORT || 4000;
