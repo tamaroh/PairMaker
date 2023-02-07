@@ -3,20 +3,23 @@ import Display from "./Display";
 import { useState } from "react";
 
 function Home() {
-  const [state, setState] = useState("");
+  const [students, setStudents] = useState("");
+  const [count, setCount] = useState(0);
+  const [pairs, setPairs] = useState([]);
   const [displayState, setDisplayState] = useState(false);
-  const [pairState, setPairState] = useState([]);
 
   return (
     <div>
       <h1 className="title">Input names</h1>
       <Display
-        state={state}
-        setState={setState}
+        students={students}
+        setStudents={setStudents}
+        count={count}
+        setCount={setCount}
         displayState={displayState}
         setDisplayState={setDisplayState}
-        pairState={pairState}
-        setPairState={setPairState}
+        pairs={pairs}
+        setPairs={setPairs}
       />
     </div>
   );

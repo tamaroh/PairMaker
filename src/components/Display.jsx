@@ -14,7 +14,9 @@ const Display = (props) => {
   return (
     <>
       <div>
+        {/* @miku Inputのstudentsの値はどこで使用しているの？  */}
         <Input students={students} setStudents={setStudents} />
+        {/* @miku Buttonのpairsの値はどこで使用しているの？  */}
         <Button
           students={students}
           setCount={setCount}
@@ -26,6 +28,7 @@ const Display = (props) => {
       {count ? (
         <div>
           <p className="display">〜〜〜 Pairs 〜〜〜</p>
+          {/* issue #15 ペア作成後の結果表示が読みにくい*/}
           <div className="each-pair">
             {JSON.stringify(pairs)}
           </div>
