@@ -1,94 +1,93 @@
+require("dotenv").config();
 const path = require("path");
 const express = require("express");
-const doc = require("./google_spreadsheet_auth");
-
-const { google } = require("googleapis");
-const authClient = require("./google_api_auth");
-console.log("authClient after req: ", authClient)
-const sheets = google.sheets("v4");
 
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "/build")));
 
-app.post("/gcp", async (req, res) => {
+/**
+ * Batch Updates values in a Spreadsheet.
+ * @param {string} spreadsheetId The spreadsheet ID.
+ * @param {string} range The range of values to update.
+ * @param {object} valueInputOption Value update options.
+ * @param {(string[])[]} _values A 2d array of values to update.
+ * @return {obj} spreadsheet information
+ */
+async function batchUpdateValues(
+  spreadsheetId,
+  range,
+  valueInputOption,
+  _values
+) {
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
-  const auth = await authClient();
-  // console.log("auth: ", auth)
+  //   const auth = new GoogleAuth({
+  //     scopes: "https://www.googleapis.com/auth/spreadsheets",
+  //   });
+  const auth = new google.auth.JWT(
+    //   credentials.client_email,
+    process.env.GOOGLE_SPREADSHEET_CLIENT_EMAIL,
+    null,
+    //   credentials.private_key,
+    process.env.GOOGLE_SPREADSHEET_PRIVATE_KEY,
+    ["https://www.googleapis.com/auth/spreadsheets"]
+  );
+
+  const service = google.sheets({ version: "v4", auth });
+    let values = _values;
+//     [
+//       // Cell values ...
+//     ],
+//     // Additional rows ...
+//   ];
   const data = [
     {
-      range: "cc-pairmaker-test!A1", // Update single cell
-      values: [["A1"]],
+      range,
+      values,
     },
   ];
-  const request = {
-    // The spreadsheet to apply the updates to.
-    spreadsheetId: process.env.SHEET_ID,
-
-    resource: {
-      // A list of updates to apply to the spreadsheet.
-      // Requests will be applied in the order they are specified.
-      // If any request is not valid, no requests will be applied.
-      requests: [], // TODO: Update placeholder value.
-
-      // TODO: Add desired properties to the request body.
-      data: data
-    },
-
-    auth: auth,
+  // Additional ranges to update ...
+  const resource = {
+    data,
+    valueInputOption,
   };
-
   try {
-    const response = (await sheets.spreadsheets.batchUpdate(request)).data;
-    // TODO: Change code below to process the `response` object:
-    console.log(JSON.stringify(response, null, 2));
-  } catch (err) {
-    console.error(err);
-  }
-
-
-
-
-  // await doc.loadInfo(); // loads document properties and worksheets
-  // console.log(doc.title);
-
-  // const sheet = doc.sheetsByTitle["cc-pairmaker-test"];
-
-  // let data = await req.body;
-  // data = JSON.parse(data.input);
-  // console.log("data: ", data);
-  // console.log("data length: ", data.length);
-
-
-  // await sheet.loadCells("A1:U21"); //セルの操作（読み込み）, @miku 20日分以上の組み合わせを作成または20組以上のペアを作成する場合は変更が必要
-  
-  /*
-  スプレッドシートに書き込みはできるけど、どうしてもリクエスト過多のエラーが出てしまう。
-
-  let day_offset = 1; //　行のタイトル分のオフセット
-  // let pair_offset = 1; // 列のタイトル分のオフセット
-  // let counter = 0;
-  //20日分ペアを組む設定　※定値
-  for (
-    let day_index = 0 + day_offset;
-    day_index < data.length + day_offset;
-    day_index++
-  ) {
-    new Promise((resolve) => {
-      setTimeout(() => {
-        data[day_index - 1].forEach((_, index) => {
-          const cell = sheet.getCell(day_index, index + 1);
-          cell.value = data[day_index - 1][index];
-          sheet.saveUpdatedCells();
-          resolve("update!")
-        });
-      }, 20000);
-    }).then((e) => {
-      console.log(e);
+    const result = await service.spreadsheets.values.batchUpdate({
+      spreadsheetId,
+      resource,
     });
-    */
+      console.log("%d cells updated.", result.data.totalUpdatedCells);
+      console.log("result ", result)
+    return result;
+  } catch (err) {
+    // TODO (developer) - Handle exception
+      console.log("err", err)
+    throw err;
+  }
+}
 
-//   }
+app.post("/gcp", async (req, res) => {
+  //   await doc.loadInfo(); // loads document properties and worksheets
+  //   console.log(doc.title);
+
+  let data = await req.body;
+  data = JSON.parse(data.input);
+  console.log("data: ", data);
+  console.log("data length: ", data.length);
+
+  /*
+    spreadsheetId,
+    range,
+    valueInputOption,
+    _values
+    */
+  const spreadsheetId = process.env.SHEET_ID;
+  const range = "cc-pairmaker-test!B2";
+  const valueInputOption = "USER_ENTERED";
+  const values = [["A1"]];
+  batchUpdateValues(spreadsheetId, range, valueInputOption, values);
   res.send(`update spread sheet!`);
 });
 
