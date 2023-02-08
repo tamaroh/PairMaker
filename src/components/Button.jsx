@@ -11,7 +11,6 @@ const Button = (props) => {
     setPairs(result);
     setCount(1)
     console.log("result: ", result);
-    //@miku dataを整形して渡す必要がある
     const { data } = await axios.post("/gcp", { input : JSON.stringify(result) });
     console.log("data: ", data);
   }
