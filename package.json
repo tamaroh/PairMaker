@@ -2,6 +2,7 @@
   "name": "pairmaker",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@react-oauth/google": "^0.6.1",
     "@testing-library/jest-dom": "^5.16.5",
