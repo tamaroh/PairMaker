@@ -12,12 +12,7 @@ async function batchUpdateValues(
   valueInputOption,
   _values
 ) {
-//   const { GoogleAuth } = require("google-auth-library");
   const { google } = require("googleapis");
-
-  //   const auth = new GoogleAuth({
-  //     scopes: "https://www.googleapis.com/auth/spreadsheets",
-  //   });
   const auth = new google.auth.JWT(
     process.env.GOOGLE_SPREADSHEET_CLIENT_EMAIL,
     null,
@@ -33,7 +28,6 @@ async function batchUpdateValues(
       values,
     },
   ];
-  // Additional ranges to update ...
   const resource = {
     data,
     valueInputOption,
@@ -44,7 +38,6 @@ async function batchUpdateValues(
       resource,
     });
       console.log("%d cells updated.", result.data.totalUpdatedCells);
-      console.log("result ", result)
     return result;
   } catch (err) {
       console.log("err", err)
@@ -56,15 +49,14 @@ app.post("/gcp", async (req, res) => {
 
   let data = await req.body;
   data = JSON.parse(data.input);
-  console.log("data: ", data);
-  console.log("data length: ", data.length);
+  console.log("Input data: ", data);
 
   const spreadsheetId = process.env.SHEET_ID;
   const range = "cc-pairmaker-test!B2:U21";
   const valueInputOption = "USER_ENTERED";
   const values = data;
   batchUpdateValues(spreadsheetId, range, valueInputOption, values);
-  res.send(`update spread sheet!`);
+  res.send(`Update spread sheet done!`);
 });
 
 const port = process.env.PORT || 4000;
