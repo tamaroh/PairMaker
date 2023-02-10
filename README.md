@@ -1,4 +1,5 @@
 # PairMaker
+## let's make pairs easily!! 
 
 ペアをランダムに自動で生成するアプリ。
 
