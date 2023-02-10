@@ -16,7 +16,9 @@ const Button = (props) => {
     const stateCopy = state;
     let pairSet = [];
     let result2;
-    function shuffle() {
+
+    //全てのペアの組み合わせを作成
+    function makeAllpatern() {
       if (state.length === 0) {
         return state;
       }
@@ -33,8 +35,10 @@ const Button = (props) => {
       console.log(pairSet);
     }
 
+    //重複のペアを削除
+    //新しい配列に被らない全てのパターンを集約する
+    const newArray = [];
     function deleateSamepair() {
-      const newArray = [];
       pairSet
         .filter((elem) => {
           return elem[0] !== elem[1];
@@ -47,8 +51,24 @@ const Button = (props) => {
       console.log(newArray);
     }
 
-    shuffle();
+    //要素を配列化
+    const newArray2 = [];
+
+    function makefinalPair() {
+      for (let i = 0; i <= newArray.length - 1; i++) {
+        newArray2.push(newArray[i].split(","));
+      }
+      console.log(newArray2);
+      return newArray2;
+    }
+
+    const newArray3 = [];
+    function notDuble() {}
+
+    makeAllpatern();
     deleateSamepair();
+    makefinalPair();
+    notDuble();
     // //配列をシャッフルする関数
     // function shuffle() {
     //   if (state.length === 0) {
