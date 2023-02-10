@@ -14,13 +14,10 @@ const Display = (props) => {
   return (
     <>
       <div>
-        {/* @miku Inputのstudentsの値はどこで使用しているの？  */}
-        <Input students={students} setStudents={setStudents} />
-        {/* @miku Buttonのpairsの値はどこで使用しているの？  */}
+        <Input setStudents={setStudents} />
         <Button
           students={students}
           setCount={setCount}
-          pairs={pairs}
           setPairs={setPairs}
         />
       </div>
