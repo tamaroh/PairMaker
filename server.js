@@ -1,42 +1,62 @@
+require("dotenv").config();
 const path = require("path");
 const express = require("express");
-const {
-  GoogleSpreadsheet,
-  // GoogleSpreadsheetWorksheet,
-} = require("google-spreadsheet");
-require("dotenv").config();
 
 const app = express();
-
-const doc = new GoogleSpreadsheet(process.env.SHEET_ID);
-
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "/build")));
 
-// Initialize Auth
-(async function () {
-  await doc.useServiceAccountAuth({
-    client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    private_key: process.env.GOOGLE_PRIVATE_KEY,
-  });
-})();
+async function batchUpdateValues(
+  spreadsheetId,
+  range,
+  valueInputOption,
+  _values
+) {
+  const { google } = require("googleapis");
+  const auth = new google.auth.JWT(
+    process.env.GOOGLE_SPREADSHEET_CLIENT_EMAIL,
+    null,
+    process.env.GOOGLE_SPREADSHEET_PRIVATE_KEY,
+    ["https://www.googleapis.com/auth/spreadsheets"]
+  );
+
+  const service = google.sheets({ version: "v4", auth });
+    let values = _values;
+  const data = [
+    {
+      range,
+      values,
+    },
+  ];
+  const resource = {
+    data,
+    valueInputOption,
+  };
+  try {
+    const result = await service.spreadsheets.values.batchUpdate({
+      spreadsheetId,
+      resource,
+    });
+      console.log("%d cells updated.", result.data.totalUpdatedCells);
+    return result;
+  } catch (err) {
+      console.log("err", err)
+    throw err;
+  }
+}
 
 app.post("/gcp", async (req, res) => {
-  await doc.loadInfo(); // loads document properties and worksheets
-  console.log(doc.title);
 
-  const sheet = doc.sheetsById[0];
+  let data = await req.body;
+  data = JSON.parse(data.input);
+  console.log("Input data: ", data);
 
-  const data = await req.body;
-  console.log("data ", data);
-
-  await sheet.loadCells("A1:E10"); //セルの操作（読み込み）
-  const a1 = await sheet.getCell(0, 0);
-
-  a1.value = data.input; //セルの操作（書き込み）
-  await sheet.saveUpdatedCells();
-
-  res.send("update!");
+  const spreadsheetId = process.env.SHEET_ID;
+  const range = "cc-pairmaker-test!B2:U21";
+  const valueInputOption = "USER_ENTERED";
+  const values = data;
+  batchUpdateValues(spreadsheetId, range, valueInputOption, values);
+  res.send(`Update spread sheet done!`);
 });
 
 const port = process.env.PORT || 4000;
