@@ -8,8 +8,7 @@ Reduce workload for B2B instructors making pairs.
 
 This app will:
 
-- Entering students' names into the application
-- Run the app for making pairs. It automatically update Google Spreadsheet with results (pairs of 20 days)
+- If you enter the student's name and then run the application, it will automatically update Google Spreadsheet with results (pairs of 20 days)
 
 # ⚙️ Getting Started
 
