@@ -24,11 +24,7 @@ const Display = (props) => {
 
       {count ? (
         <div>
-          <p className="display">〜〜〜 Pairs 〜〜〜</p>
-          {/* issue #15 ペア作成後の結果表示が読みにくい*/}
-          <div className="each-pair">
-            {JSON.stringify(pairs)}
-          </div>
+          <p className="display">ペアを作成しました</p>
         </div>
       ) : null}
     </>
