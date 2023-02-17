@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "./Input";
 import Button from "./Btn";
+import Form from 'react-bootstrap/Form';
 
 const Display = (props) => {
   let {
@@ -13,14 +14,14 @@ const Display = (props) => {
   } = props;
   return (
     <>
-      <div>
+      <Form>
         <Input setStudents={setStudents} />
         <Button
           students={students}
           setCount={setCount}
           setPairs={setPairs}
         />
-      </div>
+      </Form>
 
       {count ? (
         <div>
