@@ -2,6 +2,7 @@ import React from "react";
 import Input from "./Input";
 import Button from "./Btn";
 import Form from 'react-bootstrap/Form';
+import "./components_styles/Display.css"
 
 const Display = (props) => {
   let {
@@ -24,8 +25,8 @@ const Display = (props) => {
       </Form>
 
       {count ? (
-        <div>
-          <p className="display">ペアを作成しました</p>
+        <div className="container">
+          <p className="display">Done!👍</p>
         </div>
       ) : null}
     </>

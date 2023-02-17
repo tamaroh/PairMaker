@@ -2,6 +2,7 @@ import React from "react";
 import MakePair from "./MakePair";
 import axios from "axios";
 import Button from "react-bootstrap/Button"
+import "./components_styles/Btn.css"
 
 
 const Btn = (props) => {
