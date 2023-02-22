@@ -1,4 +1,4 @@
-import "../App.css";
+import "./components_styles/Home.css";
 import Display from "./Display";
 import { useState } from "react";
 
@@ -10,7 +10,7 @@ function Home() {
 
   return (
     <div>
-      <h1 className="title">Input names</h1>
+      <h1 className="title">Input names <img src="https://i.ibb.co/XJy9VKf/teamwork.png" alt="teamwork" border="0" height={30}/></h1>
       <Display
         students={students}
         setStudents={setStudents}

@@ -1,8 +1,11 @@
 import React from "react";
 import MakePair from "./MakePair";
 import axios from "axios";
+import Button from "react-bootstrap/Button"
+import "./components_styles/Btn.css"
 
-const Button = (props) => {
+
+const Btn = (props) => {
   let { students, setCount, setPairs } = props;
 
   //配列をシャッフルする関数
@@ -17,9 +20,9 @@ const Button = (props) => {
 
   return (
     <div className="make-pair-button">
-      <button onClick={() => go()}>Make pairs</button>
+      <Button onClick={() => go()} variant="primary">Make pairs</Button>
     </div>
   );
 };
 
-export default Button;
+export default Btn;
