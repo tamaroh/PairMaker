@@ -7,6 +7,7 @@ function Home() {
   const [count, setCount] = useState(0);
   const [pairs, setPairs] = useState([]);
   const [displayState, setDisplayState] = useState(false);
+  const [sheetId, setSheetId] = useState("")
 
   return (
     <div>
@@ -20,6 +21,7 @@ function Home() {
         setDisplayState={setDisplayState}
         pairs={pairs}
         setPairs={setPairs}
+        setSheetId={setSheetId}
       />
     </div>
   );
