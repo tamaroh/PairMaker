@@ -52,12 +52,11 @@ app.post("/gcp", async (req, res) => {
   let data = await req.body;
   pairs = JSON.parse(data.input_pairs);
   sheetId = JSON.parse(data.input_sheetId);
-  console.log("Input pairs: ", pairs);
-  console.log("Input sheetId: ", sheetId);
+  // console.log("Input pairs: ", pairs);
+  // console.log("Input sheetId: ", sheetId);
 
-  // const spreadsheetId = process.env.SHEET_ID;
   const spreadsheetId = sheetId;
-  const range = "pairmaker-result!B2:U21";
+  const range = "pairmaker-result!B2:U21"; //書きこむシート名と範囲を指定
   const valueInputOption = "USER_ENTERED";
   const values = pairs;
   batchUpdateValues(spreadsheetId, range, valueInputOption, values);

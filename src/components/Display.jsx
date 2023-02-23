@@ -11,7 +11,6 @@ const Display = (props) => {
     setStudents,
     count,
     setCount,
-    // pairs,
     setPairs,
     sheetId,
     setSheetId

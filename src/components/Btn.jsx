@@ -10,11 +10,9 @@ const Btn = (props) => {
 
   //配列をシャッフルする関数
   async function go() {
-    const result = MakePair(20, students);//第一引数で作成日数を決定している
+    const result = MakePair(20, students);//関数MakePairの第一引数で作成日数を決定
     setPairs(result);
     setCount(1)
-    // console.log("result: ", result);
-    console.log("sheetId", sheetId)
     const { data } = await axios.post("/gcp", { input_pairs : JSON.stringify(result), input_sheetId : JSON.stringify(sheetId) });
     console.log("data: ", data);
   }
