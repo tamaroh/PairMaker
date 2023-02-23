@@ -21,6 +21,7 @@ function Home() {
         setDisplayState={setDisplayState}
         pairs={pairs}
         setPairs={setPairs}
+        sheetId={sheetId}
         setSheetId={setSheetId}
       />
     </div>

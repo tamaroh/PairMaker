@@ -13,6 +13,7 @@ const Display = (props) => {
     setCount,
     // pairs,
     setPairs,
+    sheetId,
     setSheetId
   } = props;
   return (
@@ -24,6 +25,7 @@ const Display = (props) => {
           students={students}
           setCount={setCount}
           setPairs={setPairs}
+          sheetId={sheetId}
         />
       </Form>
 

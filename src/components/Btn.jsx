@@ -6,15 +6,16 @@ import "./components_styles/Btn.css"
 
 
 const Btn = (props) => {
-  let { students, setCount, setPairs } = props;
+  let { students, setCount, setPairs, sheetId } = props;
 
   //配列をシャッフルする関数
   async function go() {
     const result = MakePair(20, students);//第一引数で作成日数を決定している
     setPairs(result);
     setCount(1)
-    console.log("result: ", result);
-    const { data } = await axios.post("/gcp", { input : JSON.stringify(result) });
+    // console.log("result: ", result);
+    console.log("sheetId", sheetId)
+    const { data } = await axios.post("/gcp", { input_pairs : JSON.stringify(result), input_sheetId : JSON.stringify(sheetId) });
     console.log("data: ", data);
   }
 
