@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "./Input";
 import Button from "./Btn";
+import InputSheetId from "./InputSheetId";
 import Form from 'react-bootstrap/Form';
 import "./components_styles/Display.css"
 
@@ -10,17 +11,20 @@ const Display = (props) => {
     setStudents,
     count,
     setCount,
-    pairs,
     setPairs,
+    sheetId,
+    setSheetId
   } = props;
   return (
     <>
       <Form>
+        <InputSheetId setSheetId={setSheetId}/>
         <Input setStudents={setStudents} />
         <Button
           students={students}
           setCount={setCount}
           setPairs={setPairs}
+          sheetId={sheetId}
         />
       </Form>
 

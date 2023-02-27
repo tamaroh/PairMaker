@@ -10,7 +10,7 @@ const Input = (props) => {
           //テキストエリアの名前を取得
           props.setStudents(e.target.value.split(/\n/));
         }}
-        placeholder="Enter the names of the students in the text input field, one at a time"/>
+        placeholder="Enter the names of the students, one at a time"/>
       </Form.Group>
     </>
   );
