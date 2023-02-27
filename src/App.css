@@ -1,45 +1,18 @@
-.title {
-  text-align: center;
-}
-
-.inputName {
-  width: 80%;
-  height: 200px;
-  text-align: center;
-}
-
-textarea {
-  width: 50%;
-  height: 200px;
-}
-
-.each-pair {
-  background-color: lightgoldenrodyellow;
-  width: 30%;
-  height: 100%;
-  text-align: center;
-  border-radius: 10px;
-  border-top: solid 2px black;
-  border-bottom: solid 2px black;
-  border-left: solid 2px black;
-  border-right: solid 2px black;
-}
-
-.display {
-  text-align: center;
-  margin-top: 80px;
-  font-size: large;
-}
-
-.make-pair-button {
-  margin-top: 50px;
-  text-align: center;
-}
-
 div {
   margin: auto;
 }
 
-button {
-  font-size: 150%;
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.login-logout_btn {
+  margin-left: 3%;
+}
+
+.subtitle{
+  color: gray;
+  margin-left: 3%;
+  margin-top: 2%;
 }

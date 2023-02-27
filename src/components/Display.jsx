@@ -1,6 +1,8 @@
 import React from "react";
 import Input from "./Input";
-import Button from "./Button";
+import Button from "./Btn";
+import Form from 'react-bootstrap/Form';
+import "./components_styles/Display.css"
 
 const Display = (props) => {
   let {
@@ -13,21 +15,18 @@ const Display = (props) => {
   } = props;
   return (
     <>
-      <div>
-        {/* @miku Inputのstudentsの値はどこで使用しているの？  */}
-        <Input students={students} setStudents={setStudents} />
-        {/* @miku Buttonのpairsの値はどこで使用しているの？  */}
+      <Form>
+        <Input setStudents={setStudents} />
         <Button
           students={students}
           setCount={setCount}
-          pairs={pairs}
           setPairs={setPairs}
         />
-      </div>
+      </Form>
 
       {count ? (
-        <div>
-          <p className="display">ペアを作成しました</p>
+        <div className="container">
+          <p className="display">Done!👍</p>
         </div>
       ) : null}
     </>

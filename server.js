@@ -52,7 +52,7 @@ app.post("/gcp", async (req, res) => {
   console.log("Input data: ", data);
 
   const spreadsheetId = process.env.SHEET_ID;
-  const range = "cc-pairmaker-test!B2:U21";
+  const range = "pairmaker-result!B2:U21";
   const valueInputOption = "USER_ENTERED";
   const values = data;
   batchUpdateValues(spreadsheetId, range, valueInputOption, values);
