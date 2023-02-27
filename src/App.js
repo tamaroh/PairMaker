@@ -3,6 +3,7 @@ import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import "./App.css";
 import Home from "./components/Home";
+import Button from "react-bootstrap/Button";
 
 function App() {
   const [user, setUser] = useState([]);
@@ -38,16 +39,26 @@ function App() {
   };
   return (
     <div>
-      <h2>Pair Maker</h2>
-      <br />
-      <br />
+      <h5 className="subtitle">Pair Maker</h5>
       {profile ? (
         <div>
+          <Button
+            onClick={logOut}
+            className="login-logout_btn"
+            variant="secondary"
+          >
+            Log out
+          </Button>
           <Home />
-          <button onClick={logOut}>Log out</button>
         </div>
       ) : (
-        <button onClick={() => login()}>Sign in with Google 🚀 </button>
+        <Button
+          className="login-logout_btn"
+          variant="secondary"
+          onClick={() => login()}
+        >
+          Sign in with Google 🚀{" "}
+        </Button>
       )}
     </div>
   );
