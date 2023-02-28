@@ -1,6 +1,9 @@
 import React from "react";
 import Input from "./Input";
-import Button from "./Button";
+import Button from "./Btn";
+import InputSheetId from "./InputSheetId";
+import Form from 'react-bootstrap/Form';
+import "./components_styles/Display.css"
 
 const Display = (props) => {
   let {
@@ -8,27 +11,27 @@ const Display = (props) => {
     setStudents,
     count,
     setCount,
-    pairs,
     setPairs,
+    sheetId,
+    setSheetId
   } = props;
   return (
     <>
-      <div>
+
+      <Form>
+        <InputSheetId setSheetId={setSheetId}/>
         <Input setStudents={setStudents} />
         <Button
           students={students}
           setCount={setCount}
           setPairs={setPairs}
+          sheetId={sheetId}
         />
-      </div>
+      </Form>
 
       {count ? (
-        <div>
-          <p className="display">〜〜〜 Pairs 〜〜〜</p>
-          {/* issue #15 ペア作成後の結果表示が読みにくい*/}
-          <div className="each-pair">
-            {JSON.stringify(pairs)}
-          </div>
+        <div className="container">
+          <p className="display">Done!👍</p>
         </div>
       ) : null}
     </>

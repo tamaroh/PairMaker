@@ -46,15 +46,19 @@ async function batchUpdateValues(
 }
 
 app.post("/gcp", async (req, res) => {
+  let pairs = ""; 
+  let sheetId = ""; 
 
   let data = await req.body;
-  data = JSON.parse(data.input);
-  console.log("Input data: ", data);
+  pairs = JSON.parse(data.input_pairs);
+  sheetId = JSON.parse(data.input_sheetId);
+  // console.log("Input pairs: ", pairs);
+  // console.log("Input sheetId: ", sheetId);
 
-  const spreadsheetId = process.env.SHEET_ID;
-  const range = "cc-pairmaker-test!B2:U21";
+  const spreadsheetId = sheetId;
+  const range = "pairmaker-result!B2:U21"; //書きこむシート名と範囲を指定
   const valueInputOption = "USER_ENTERED";
-  const values = data;
+  const values = pairs;
   batchUpdateValues(spreadsheetId, range, valueInputOption, values);
   res.send(`Update spread sheet done!`);
 });
