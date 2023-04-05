@@ -16,8 +16,8 @@ Before running any scripts, you'll need additional setups. After 1 steps, you sh
 
 ```shell
 $ npm install
-$ npm server-dev
-$ npm react-start
+$ npm run server-dev
+$ npm run react-start
 ```
 
 Steps:
