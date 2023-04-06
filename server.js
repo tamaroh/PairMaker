@@ -2,6 +2,8 @@ require("dotenv").config();
 const path = require("path");
 const express = require("express");
 
+const utility = require("./utility")
+
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "/build")));
@@ -52,11 +54,12 @@ app.post("/gcp", async (req, res) => {
   let data = await req.body;
   pairs = JSON.parse(data.input_pairs);
   sheetId = JSON.parse(data.input_sheetId);
-  // console.log("Input pairs: ", pairs);
+  console.log("Input pairs: ", pairs);
   // console.log("Input sheetId: ", sheetId);
+  const numberOfPairs = utility.setChar(pairs[0].length) //Google Spreadsheet 書き込み範囲のセル番地（行）を取得
 
   const spreadsheetId = sheetId;
-  const range = "pairmaker-result!B2:U21"; //書きこむシート名と範囲を指定
+  const range = `pairmaker-result!B2:${numberOfPairs}21`; //書きこみ先と書き込み範囲をシートタイトルとセル番地で指定
   const valueInputOption = "USER_ENTERED";
   const values = pairs;
   batchUpdateValues(spreadsheetId, range, valueInputOption, values);
