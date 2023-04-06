@@ -15,6 +15,7 @@ const Btn = (props) => {
     setCount(1)
     const { data } = await axios.post("/gcp", { input_pairs : JSON.stringify(result), input_sheetId : JSON.stringify(sheetId) });
     setMessage(data)
+    console.log("Google sheet update: ", data)
   }
 
   return (
