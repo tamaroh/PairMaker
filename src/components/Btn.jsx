@@ -6,7 +6,7 @@ import "./components_styles/Btn.css"
 
 
 const Btn = (props) => {
-  let { students, setCount, setPairs, sheetId } = props;
+  let { students, setCount, setPairs, sheetId, setMessage } = props;
 
   //配列をシャッフルする関数
   async function go() {
@@ -14,7 +14,7 @@ const Btn = (props) => {
     setPairs(result);
     setCount(1)
     const { data } = await axios.post("/gcp", { input_pairs : JSON.stringify(result), input_sheetId : JSON.stringify(sheetId) });
-    console.log("data: ", data);
+    setMessage(data)
   }
 
   return (
