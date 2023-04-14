@@ -49,7 +49,8 @@ const makeList = () => {
           }
           if (element[i] !== elem && nameList[elem][element[i]] === undefined) {
             nameList[elem][element[i]] = 0;
-          } else {
+          }
+           if (element[i] !== elem) {
             nameList[elem][element[i]] += 1;
           }
         }
