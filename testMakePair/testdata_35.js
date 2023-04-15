@@ -35,21 +35,6 @@ const nameList = () => [
   "Makayla Thompson",
   "Benjamin Hernandez",
   "Chloe Martinez",
-  "Ryan Rodriguez",
-  "Ella Brown",
-  "Joshua Wilson",
-  "Aaliyah Davis",
-  "Nathan Taylor",
-  "Avery Anderson",
-  "Lauren Hernandez",
-  "Jacob Lee",
-  "Natalie Kim",
-  "Connor Smith",
-  "Brianna Martinez",
-  "Isaac Jones",
-  "Leah Davis",
-  "Jonathan Wilson",
-  "Mike Mayer"
 ];
 
 module.exports = nameList; 
