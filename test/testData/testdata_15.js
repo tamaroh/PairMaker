@@ -1,5 +1,5 @@
 const nameList = () => [ 
-//ランダムに生成された50人の名前
+//ランダムに生成された15人の名前
   "Jasmine Gonzalez",
   "Luke Ross",
   "Olivia Lee",
