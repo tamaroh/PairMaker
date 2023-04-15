@@ -1,18 +1,7 @@
 /**
- * Test function
- *
- * @param {expected}
- * @param {actual}
- * @return {boolean}
- */
-const test = (expected, actual) => {
-  return JSON.stringify(expected) === JSON.stringify(actual) ? "OK" : "Failed";
-};
-
-/**
  * ペアの結果、対になった相手との回数を一覧にして出力する
  *
- * @param {list} string - Two-dimensional-array
+ * @param {list} array - makePairによって返される値
  * @return {object} object
  */
 const countPairMember = (list) => {
@@ -32,12 +21,12 @@ const countPairMember = (list) => {
   //コンテナから各メンバー毎にペアとなったメンバーとその回数をオブジェクトで記録する
   for (let i = 0; i < container.length; i++) {
     // console.log("container[i]: ", container[i])
-    let dailyList = container[i]; 
+    let dailyList = container[i];
     for (let k = 0; k < dailyList.length; k++) {
       // console.log("group: dailyList[k]: ", dailyList[k]);
-      let dailyPair = dailyList[k]; 
+      let dailyPair = dailyList[k];
 
-      dailyPair = dailyPair.map(e=>e.trim()); //ペアの配列の各要素から不要なスペースを削除しておく
+      dailyPair = dailyPair.map((e) => e.trim()); //ペアの配列の各要素から不要なスペースを削除しておく
       for (let j = 0; j < dailyPair.length; j++) {
         if (nameList[dailyPair[j]] === undefined) {
           nameList[dailyPair[j]] = {};
@@ -46,8 +35,7 @@ const countPairMember = (list) => {
           // console.log("dailyPair[l]: ", dailyPair[l]);
           if (
             dailyPair[j] !== dailyPair[l] &&
-            nameList[dailyPair[j]][dailyPair[l]] ===
-              undefined
+            nameList[dailyPair[j]][dailyPair[l]] === undefined
           ) {
             nameList[dailyPair[j]][dailyPair[l]] = 0;
           }
@@ -66,7 +54,7 @@ const countPairMember = (list) => {
  * あるメンバーが他のメンバーと3回より多くペアを組んでいないかをチェックする
  *
  * @param {list} object - countPairMemberの返り値であるペアのリスト
- * @return {boolean} boolean 
+ * @return {boolean} boolean
  */
 function checkPairs(list) {
   let isValid = true;
@@ -81,8 +69,10 @@ function checkPairs(list) {
       Object.values(pairs[i]).length !==
       Object.values(pairs[i]).filter((e) => e < 4).length
     ) {
-      console.log(`${student[i]} has paired with someone more than 3`);
-      console.log(`---`);
+      // console.log(`${student[i]} has paired with someone more than 3`);
+      // console.log(`---`);
+      // console.log(`${student[i]}: ${Object.values(pairs[i])}`);
+
       isValid = false;
     }
   }
@@ -96,7 +86,7 @@ function checkPairs(list) {
  * @return {wholeList} 日ごとにペアにアサインされた生徒の名まえを格納した配列
  */
 function assignedStudents(list) {
-  let wholeList = []
+  let wholeList = [];
   list.forEach((pairs) => {
     let arrayOfPair = pairs.map((pair) => {
       return pair.split("&");
@@ -106,17 +96,11 @@ function assignedStudents(list) {
     for (const pair of arrayOfPair) {
       dailyList = dailyList.concat(pair);
     }
-    wholeList.push(dailyList)
+    wholeList.push(dailyList);
   });
   // console.log("wholeList: ", wholeList)
-  return wholeList
+  return wholeList;
 }
-// 
-
-
-
-
-
-
+//
 
 module.exports = { countPairMember, checkPairs, assignedStudents };

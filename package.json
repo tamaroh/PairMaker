@@ -26,7 +26,8 @@
     "server-dev": "nodemon server.js",
     "start": "node server.js",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "mocha":"mocha"
   },
   "eslintConfig": {
     "extends": [
