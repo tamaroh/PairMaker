@@ -1,6 +1,5 @@
 const makePair = require("./MakePair_copy");
-const { assignedStudents } = require("./utility");
-const {countPairMember, checkPairs} = require("../utility");
+const { assignedStudents, countPairMember, checkPairs } = require("./utility");
 const data10 = require("./testData/testdata_10")(); //10名のリスト
 const data13 = require("./testData/testdata_13")(); //13名のリスト
 const data15 = require("./testData/testdata_15")(); //15名のリスト
