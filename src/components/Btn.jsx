@@ -14,7 +14,6 @@ const Btn = (props) => {
     const resultOfMakepair = await MakePair(20, students); //MakePair第一引数でペア作成日数を指定
     let result = checkPairs(countPairMember(resultOfMakepair));
     if (result === true) {
-      console.log("result: ", countPairMember(resultOfMakepair));
       setPairs(resultOfMakepair);
       setCount(1);
       const { data } = await axios.post("/gcp", {
@@ -28,25 +27,6 @@ const Btn = (props) => {
       getIdealPair();
     }
   }
-
-  // async function getIdealPair() {
-  //   const resultOfMakepair = await MakePair(20, students);//関数MakePairの第一引数で作成日
-  //   let result = checkPairs(countPairMember(resultOfMakepair));
-  //   if (result === true) {
-  //     return resultOfMakepair;
-  //   } else {
-  //     getIdealPair();
-  //   }
-  // }
-  // const result = getIdealPair()
-
-  // console.log("result: ", result)
-  // setPairs(result);
-  // setCount(1)
-  // const { data } = await axios.post("/gcp", { input_pairs : JSON.stringify(result), input_sheetId : JSON.stringify(sheetId) });
-  // setMessage(data)
-  // console.log("Google sheet update: ", data)
-  // }
 
   return (
     <div className="make-pair-button">

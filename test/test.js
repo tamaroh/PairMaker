@@ -16,49 +16,49 @@ describe("MakePair", function () {
     it("data10 contains 10people", () => {
       assert.equal(data10.length, 10);
     });
-    xit("data13 contains 13people", () => {
+    it("data13 contains 13people", () => {
       assert.equal(data13.length, 13);
     });
-    xit("data15 contains 15people", () => {
+    it("data15 contains 15people", () => {
       assert.equal(data15.length, 15);
     });
-    xit("data17 contains 17people", () => {
+    it("data17 contains 17people", () => {
       assert.equal(data17.length, 17);
     });
-    xit("data20 contains 20people", () => {
+    it("data20 contains 20people", () => {
       assert.equal(data20.length, 20);
     });
-    xit("data25 contains 25people", () => {
+    it("data25 contains 25people", () => {
       assert.equal(data25.length, 25);
     });
-    xit("data35 contains 35people", () => {
+    it("data35 contains 35people", () => {
       assert.equal(data35.length, 35);
     });
-    xit("data50 contains 50people", () => {
+    it("data50 contains 50people", () => {
       assert.equal(data50.length, 50);
     });
   });
 });
 describe("created days", () => {
   const testResult13 = makePair(20, data13);
-  xit("is 20days", () => {
+  it("is 20days", () => {
     assert.equal(testResult13.length, 20);
   });
   const testResult25 = makePair(20, data25);
-  xit("is 20days", () => {
+  it("is 20days", () => {
     assert.equal(testResult25.length, 20);
   });
   const testResult35 = makePair(20, data35);
-  xit("is 20days", () => {
+  it("is 20days", () => {
     assert.equal(testResult35.length, 20);
   });
   const testResult50 = makePair(20, data50);
-  xit("is 20days", () => {
+  it("is 20days", () => {
     assert.equal(testResult50.length, 20);
   });
 });
 describe("created pairs ", () => {
-  xit("pairs assigned all 13 students", () => {
+  it("pairs assigned all 13 students", () => {
     const testResult13 = makePair(20, data13);
     const result = assignedStudents(testResult13);
     assert.equal(new Set(result[0]).size, 13);
@@ -82,7 +82,7 @@ describe("created pairs ", () => {
     assert.equal(new Set(result[18]).size, 13);
     assert.equal(new Set(result[19]).size, 13);
   });
-  xit("pairs assigned all 50 students", () => {
+  it("pairs assigned all 50 students", () => {
     const testResult50 = makePair(20, data50);
     const result = assignedStudents(testResult50);
     assert.equal(new Set(result[0]).size, 50);
@@ -108,13 +108,8 @@ describe("created pairs ", () => {
   });
   describe("paired partner", () => {
     it("10 students hasn't paired with any paticuler partner more than 4 times", () => {
-      // assert.equal(
-      //   checkPairs(countPairMember(getIdealPairs(makePair(20, data10)))),
-      //   true
-      // );
       async function repeatFunc() {
         let resultOf10People = await makePair(10, data10);
-        // console.log("resultOf10People: ", resultOf10People);
         let result = checkPairs(countPairMember(resultOf10People));
         if (result === true) {
           return resultOf10People;
