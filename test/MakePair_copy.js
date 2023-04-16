@@ -1,6 +1,7 @@
 /**
  * This module is copied from MakePair.js to test.
  * This can make pairs from given list
+ * 【重要】makepairをNode.js環境で単体テストするためにコピーを作成しています。makepair関数とテスト用のコピー関数は手作業で同期させてください
  *
  * @param {number} days - A number of days to make pairs
  * @param {array} array - An array contains names of people

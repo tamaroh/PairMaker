@@ -23,6 +23,7 @@ function assignedStudents(list) {
 
 /**
  * ペアの結果、対になった相手との回数を一覧にして出力する
+ *【重要】countPairMemberをNode.js環境で単体テストするためにコピーを作成しています。countPairMember関数とテスト用のコピー関数は手作業で同期させてください
  *
  * @param {list} array - makePairによって返される値
  * @return {object} object
@@ -75,6 +76,7 @@ const countPairMember = (list) => {
 
 /**
  * あるメンバーが他のメンバーと3回より多くペアを組んでいないかをチェックする
+ *【重要】checkPairsをNode.js環境で単体テストするためにコピーを作成しています。checkPairs関数とテスト用のコピー関数は手作業で同期させてください
  *
  * @param {list} object - countPairMemberの返り値であるペアのリスト
  * @return {boolean} boolean
