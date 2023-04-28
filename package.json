@@ -25,8 +25,9 @@
     "build": "npm install && react-scripts build",
     "server-dev": "nodemon server.js",
     "start": "node server.js",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
+    "eject": "react-scripts eject",
+    "mocha":"mocha"
   },
   "eslintConfig": {
     "extends": [
@@ -46,5 +47,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:4000"
+  "proxy": "http://localhost:4000",
+  "devDependencies": {
+    "mocha": "^10.2.0"
+  }
 }
