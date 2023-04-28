@@ -16,8 +16,8 @@ Before running any scripts, you'll need additional setups. After 1 steps, you sh
 
 ```shell
 $ npm install
-$ npm server-dev
-$ npm react-start
+$ npm run server-dev
+$ npm run react-start
 ```
 
 Steps:
@@ -60,4 +60,4 @@ This app is:
 
 - [Create a Google Cloud project](https://developers.google.com/workspace/guides/create-project)
 - [Google Sheets API](https://console.cloud.google.com/apis/library/sheets.googleapis.com)
-- [Create the OAuth web client ID](https://support.google.com/workspacemigrate/answer/9222992)
+- [Create the OAuth web client ID](https://support.google.com/workspacemigrate/answer/9222992) 

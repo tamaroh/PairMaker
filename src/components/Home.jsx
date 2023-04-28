@@ -8,6 +8,7 @@ function Home() {
   const [pairs, setPairs] = useState([]);
   const [displayState, setDisplayState] = useState(false);
   const [sheetId, setSheetId] = useState("")
+  const [message, setMessage] = useState("")
 
   return (
     <div>
@@ -23,6 +24,8 @@ function Home() {
         setPairs={setPairs}
         sheetId={sheetId}
         setSheetId={setSheetId}
+        message={message}
+        setMessage={setMessage}
       />
     </div>
   );
