@@ -2,17 +2,64 @@ div {
   margin: auto;
 }
 
+p{
+  text-align: center;
+}
+
 .container {
   display: flex;
   justify-content: center;
 }
 
 .login-logout_btn {
-  margin-left: 3%;
+  margin-left: 44%;
+  margin-bottom:40px;
 }
 
 .subtitle{
   color: gray;
   margin-left: 3%;
   margin-top: 2%;
+}
+
+
+.submitButton{
+  display: block;
+  margin-top: 25px;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 30px;
+  cursor: pointer;
+}
+
+.uniForm{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 200px;
+}
+
+.formField{
+  display: flex;
+  flex-direction: column;
+}
+
+.formField input{
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+
+.formField input:focus{
+  outline: none;
+}
+
+.formField label{
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+input::placeholder{
+  font-size: 10px;
 }
