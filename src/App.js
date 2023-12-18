@@ -4,10 +4,14 @@ import axios from "axios";
 import "./App.css";
 import Home from "./components/Home";
 import Button from "react-bootstrap/Button";
+import instructorList from "./list";
 
 function App() {
   const [user, setUser] = useState([]);
   const [profile, setProfile] = useState([]);
+  const [userAddress, setUerAddress] = useState([])
+  const [userPassword, setUerPassword] = useState([])
+
 
   useEffect(() => {
     if (user.access_token !== undefined) {
@@ -32,6 +36,12 @@ function App() {
     onSuccess: (codeResponse) => setUser(codeResponse),
     onError: (error) => console.log("Login Failed:", error),
   });
+
+  function addressLogin(){
+    if (Object.keys(instructorList).indexOf(userAddress) !== -1 && instructorList[userAddress] === userPassword){
+      setProfile(true)
+    }
+  }
   // log out function to log the user out of google and set the profile array to null
   const logOut = () => {
     googleLogout();
@@ -39,7 +49,9 @@ function App() {
   };
   return (
     <div>
+      <div>
       <h5 className="subtitle">Pair Maker</h5>
+      </div>
       {profile ? (
         <div>
           <Button
@@ -52,13 +64,28 @@ function App() {
           <Home />
         </div>
       ) : (
-        <Button
-          className="login-logout_btn"
-          variant="secondary"
-          onClick={() => login()}
-        >
-          Sign in with Google 🚀{" "}
-        </Button>
+        <div>
+          <Button
+            className="login-logout_btn"
+            variant="secondary"
+            onClick={() => login()}
+            >
+            Sign in with Google 🚀{" "}
+          </Button>
+          <p>Or</p>
+          <hr></hr>
+          <div className="uniForm">
+            <div className="formField">
+              <label>Mail address</label>
+              <input type="text" placeholder="メールアドレス" name="mailAddress" value={userAddress} onChange={(event) => setUerAddress(event.target.value)}/>
+            </div>
+            <div className="formField">
+              <label>Password</label>
+              <input type="text" placeholder="パスワード" name="password" value={userPassword} onChange={(event) => setUerPassword(event.target.value)}/>
+            </div>
+            <Button className="submitButton" onClick={() => addressLogin()}>Login</Button>
+          </div>
+        </div>
       )}
     </div>
   );
